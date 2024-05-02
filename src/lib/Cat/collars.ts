@@ -1,0 +1,26 @@
+enum CollarColor {
+	CRIMSON = 'CRIMSON',
+	BLUE = 'BLUE',
+	YELLOW = 'YELLOW',
+	CYAN = 'CYAN',
+	RED = 'RED',
+	LIME = 'LIME',
+	GREEN = 'GREEN',
+	RAINBOW = 'RAINBOW',
+	BLACK = 'BLACK',
+	SPIKES = 'SPIKES',
+	WHITE = 'WHITE',
+	PINK = 'PINK',
+	PURPLE = 'PURPLE',
+	MULTI = 'MULTI',
+	INDIGO = 'INDIGO'
+}
+
+enum CollarType {
+	COLOUR = 'COLOUR',
+	COLOURBELL = 'COLOURBELL',
+	COLOURBOW = 'COLOURBOW',
+	COLOURNYLON = 'COLOURNYLON'
+}
+
+export { CollarColor, CollarType };
