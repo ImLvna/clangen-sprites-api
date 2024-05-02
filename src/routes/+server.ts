@@ -30,11 +30,13 @@ export const GET: RequestHandler = async ({ url }) => {
 		let img: Sharp | null = null;
 		let firstWidth: number | undefined = undefined;
 		let firstHeight: number | undefined = undefined;
+		let firstX: number | undefined = undefined;
+		let firstY: number | undefined = undefined;
 
 		for (const query of qList) {
 			const data = queryToData(query);
-			const { path, x, y } = data;
-			let { w, h } = data;
+			const { path } = data;
+			let { w, h, x, y } = data;
 
 			if (!spriteSheets[path]) {
 				console.log('Invalid path');
@@ -48,6 +50,14 @@ export const GET: RequestHandler = async ({ url }) => {
 				firstHeight = h;
 			}
 
+			if (!firstX && x) {
+				firstX = x;
+			}
+
+			if (!firstY && y) {
+				firstY = y;
+			}
+
 			if (!w) {
 				w = firstWidth;
 			}
@@ -55,7 +65,17 @@ export const GET: RequestHandler = async ({ url }) => {
 			if (!h) {
 				h = firstHeight;
 			}
-			console.log({ path, x, y, w, h });
+
+			if (!x) {
+				x = firstX;
+			}
+
+			if (!y) {
+				y = firstY;
+			}
+
+			x = (x! - 1) * w!;
+			y = (y! - 1) * h!;
 
 			try {
 				const sheet = sharp(spriteSheets[path]);
