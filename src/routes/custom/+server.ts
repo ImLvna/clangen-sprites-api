@@ -14,6 +14,10 @@ const queryToData = (query: string) => {
 	return { path, x, y, w, h };
 };
 
+function numIsDefined(num: number | undefined): boolean {
+	return typeof num === 'number' && !isNaN(num);
+}
+
 export const GET: RequestHandler = async ({ url }) => {
 	const qList = url.search.replace('?', '').split('&');
 	console.log(qList);
@@ -38,39 +42,41 @@ export const GET: RequestHandler = async ({ url }) => {
 			const { path } = data;
 			let { w, h, x, y } = data;
 
+			console.log(data);
+
 			if (!spriteSheets[path]) {
 				console.log('Invalid path');
 				return error(404, 'Invalid path');
 			}
 
-			if (!firstWidth && w) {
+			if (numIsDefined(firstWidth) && w) {
 				firstWidth = w;
 			}
-			if (!firstHeight && h) {
+			if (numIsDefined(firstHeight) && h) {
 				firstHeight = h;
 			}
 
-			if (!firstX && x) {
+			if (!numIsDefined(firstX) && x) {
 				firstX = x;
 			}
 
-			if (!firstY && y) {
+			if (!numIsDefined(firstY) && y) {
 				firstY = y;
 			}
 
-			if (!w) {
+			if (!numIsDefined(w)) {
 				w = firstWidth;
 			}
 
-			if (!h) {
+			if (!numIsDefined(h)) {
 				h = firstHeight;
 			}
 
-			if (!x) {
+			if (!numIsDefined(x)) {
 				x = firstX;
 			}
 
-			if (!y) {
+			if (!numIsDefined(y)) {
 				y = firstY;
 			}
 
